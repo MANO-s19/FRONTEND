@@ -4,6 +4,7 @@ public class VRMenuController : MonoBehaviour
 {
     public GameObject mainMenu;
     public GameObject pauseMenu;
+    public GameObject instructionMenu;
     public GameObject endMenu;
 
     void Start()
@@ -13,20 +14,51 @@ public class VRMenuController : MonoBehaviour
 
     public void OpenMainMenu()
     {
+        DisableAll();
         mainMenu.SetActive(true);
-        pauseMenu.SetActive(false);
-        endMenu.SetActive(false);
     }
 
     public void OpenPauseMenu()
     {
+        DisableAll();
         pauseMenu.SetActive(true);
-        mainMenu.SetActive(false);
+        GameStateManager.Instance.PauseRide();
+    }
+
+    public void OpenInstructionMenu()
+    {
+        DisableAll();
+        instructionMenu.SetActive(true);
     }
 
     public void OpenEndMenu()
     {
+        DisableAll();
         endMenu.SetActive(true);
+    }
+
+    void DisableAll()
+    {
+        mainMenu.SetActive(false);
         pauseMenu.SetActive(false);
+        instructionMenu.SetActive(false);
+        endMenu.SetActive(false);
+    }
+
+    public void StartRide()
+    {
+        mainMenu.SetActive(false);
+        GameStateManager.Instance.StartRide();
+    }
+
+    public void ResumeRide()
+    {
+        pauseMenu.SetActive(false);
+        GameStateManager.Instance.ResumeRide();
+    }
+
+    public void ExitApplication()
+    {
+        Application.Quit();
     }
 }
