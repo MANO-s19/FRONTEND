@@ -1,9 +1,0 @@
-using UnityEngine;
-
-public class RideStart : MonoBehaviour
-{
-    public void StartRide()
-    {
-        Debug.Log("Ride Started");
-    }
-}
