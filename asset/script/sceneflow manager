@@ -3,21 +3,21 @@ using UnityEngine.SceneManagement;
 
 public class SceneFlowManager : MonoBehaviour
 {
-    public string mainScene;
+    public string mainMenuScene;
     public string rideScene;
 
     public void LoadMainMenu()
     {
-        SceneManager.LoadScene(mainScene);
+        SceneManager.LoadScene(mainMenuScene);
     }
 
-    public void LoadRide()
+    public void LoadRideScene()
     {
         SceneManager.LoadScene(rideScene);
     }
 
-    public void ReloadScene()
+    public void ReloadCurrentScene()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
