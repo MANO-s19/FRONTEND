@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>VR Roller Coaster</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h1>VR Roller Coaster Learning System</h1>
+
+<button onclick="go('instructions.html')">Start</button>
+<button onclick="go('features.html')">Features</button>
+<button onclick="go('about.html')">About</button>
+<button onclick="go('exit')">Exit</button>
+
+<script src="js/navigation.js"></script>
+</body>
+</html>
