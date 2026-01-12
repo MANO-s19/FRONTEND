@@ -1,0 +1,56 @@
+using UnityEngine;
+
+public class GameStateManager : MonoBehaviour
+{
+    public static GameStateManager Instance;
+
+    public bool isRideStarted;
+    public bool isPaused;
+    public bool isRideCompleted;
+
+    void Awake()
+    {
+        if (Instance == null)
+            Instance = this;
+        else
+            Destroy(gameObject);
+    }
+
+    void Start()
+    {
+        ResetState();
+    }
+
+    public void StartRide()
+    {
+        isRideStarted = true;
+        isPaused = false;
+        isRideCompleted = false;
+    }
+
+    public void PauseRide()
+    {
+        isPaused = true;
+        Time.timeScale = 0f;
+    }
+
+    public void ResumeRide()
+    {
+        isPaused = false;
+        Time.timeScale = 1f;
+    }
+
+    public void EndRide()
+    {
+        isRideCompleted = true;
+        isRideStarted = false;
+    }
+
+    public void ResetState()
+    {
+        isRideStarted = false;
+        isPaused = false;
+        isRideCompleted = false;
+        Time.timeScale = 1f;
+    }
+}
