@@ -1,15 +1,17 @@
 using UnityEngine;
 
-public class RideCompletionDetector : MonoBehaviour
+public class RideCompletionManager : MonoBehaviour
 {
     public Transform endPoint;
-    public RideMovementController ride;
+    public Transform cart;
 
     void Update()
     {
-        if (Vector3.Distance(ride.transform.position, endPoint.position) < 0.5f)
+        if (!GameStateManager.Instance.isRideStarted) return;
+
+        if (Vector3.Distance(cart.position, endPoint.position) < 0.5f)
         {
-            GameStateManager.Instance.EndRide();
+            GameStateManager.Instance.CompleteRide();
         }
     }
 }
