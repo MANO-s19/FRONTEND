@@ -1,0 +1,17 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+public class RideProgressTracker : MonoBehaviour
+{
+    public Slider progressBar;
+    public float duration = 60f;
+    private float time;
+
+    void Update()
+    {
+        if (!GameStateManager.Instance.isRideStarted) return;
+
+        time += Time.deltaTime;
+        progressBar.value = time / duration;
+    }
+}
