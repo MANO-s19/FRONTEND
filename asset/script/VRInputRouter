@@ -1,0 +1,13 @@
+using UnityEngine;
+
+public class VRInputRouter : MonoBehaviour
+{
+    void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Space))
+            GameStateManager.Instance.StartRide();
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+            GameStateManager.Instance.PauseRide();
+    }
+}
