@@ -1,0 +1,23 @@
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneFlowManager : MonoBehaviour
+{
+    public string mainScene;
+    public string rideScene;
+
+    public void LoadMainMenu()
+    {
+        SceneManager.LoadScene(mainScene);
+    }
+
+    public void LoadRide()
+    {
+        SceneManager.LoadScene(rideScene);
+    }
+
+    public void ReloadScene()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+}
