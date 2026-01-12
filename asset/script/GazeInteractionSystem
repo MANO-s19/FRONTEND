@@ -1,0 +1,38 @@
+using UnityEngine;
+
+public class GazeInteractionSystem : MonoBehaviour
+{
+    public float gazeTime = 2f;
+    private float timer;
+    private bool gazing;
+
+    void Update()
+    {
+        if (gazing)
+        {
+            timer += Time.deltaTime;
+            if (timer >= gazeTime)
+            {
+                Activate();
+                gazing = false;
+            }
+        }
+    }
+
+    public void OnGazeEnter()
+    {
+        gazing = true;
+        timer = 0f;
+    }
+
+    public void OnGazeExit()
+    {
+        gazing = false;
+        timer = 0f;
+    }
+
+    void Activate()
+    {
+        Debug.Log("Gaze Interaction Triggered");
+    }
+}
