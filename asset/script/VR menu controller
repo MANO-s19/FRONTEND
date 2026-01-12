@@ -1,0 +1,32 @@
+using UnityEngine;
+
+public class VRMenuController : MonoBehaviour
+{
+    public GameObject mainMenu;
+    public GameObject pauseMenu;
+    public GameObject endMenu;
+
+    void Start()
+    {
+        OpenMainMenu();
+    }
+
+    public void OpenMainMenu()
+    {
+        mainMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+        endMenu.SetActive(false);
+    }
+
+    public void OpenPauseMenu()
+    {
+        pauseMenu.SetActive(true);
+        mainMenu.SetActive(false);
+    }
+
+    public void OpenEndMenu()
+    {
+        endMenu.SetActive(true);
+        pauseMenu.SetActive(false);
+    }
+}
