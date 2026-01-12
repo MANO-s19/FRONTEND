@@ -1,0 +1,36 @@
+using UnityEngine;
+
+public class RideMovementController : MonoBehaviour
+{
+    public Transform[] waypoints;
+    public float speed = 5f;
+    private int index;
+
+    void Update()
+    {
+        if (!GameStateManager.Instance.isRideStarted) return;
+        Move();
+    }
+
+    void Move()
+    {
+        if (index >= waypoints.Length) return;
+
+        Transform target = waypoints[index];
+        transform.position = Vector3.MoveTowards(
+            transform.position,
+            target.position,
+            speed * Time.deltaTime
+        );
+
+        transform.LookAt(target);
+
+        if (Vector3.Distance(transform.position, target.position) < 0.2f)
+            index++;
+    }
+
+    public void ResetRide()
+    {
+        index = 0;
+    }
+}
