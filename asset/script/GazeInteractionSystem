@@ -3,36 +3,63 @@ using UnityEngine;
 public class GazeInteractionSystem : MonoBehaviour
 {
     public float gazeTime = 2f;
-    private float timer;
-    private bool gazing;
+    private float currentGaze;
+    private bool isGazing;
+    private bool activated;
+
+    public GameObject progressIndicator;
+
+    void Start()
+    {
+        ResetGaze();
+    }
 
     void Update()
     {
-        if (gazing)
+        if (!isGazing || activated) return;
+
+        currentGaze += Time.deltaTime;
+        UpdateIndicator();
+
+        if (currentGaze >= gazeTime)
         {
-            timer += Time.deltaTime;
-            if (timer >= gazeTime)
-            {
-                Activate();
-                gazing = false;
-            }
+            Activate();
         }
     }
 
     public void OnGazeEnter()
     {
-        gazing = true;
-        timer = 0f;
+        isGazing = true;
+        currentGaze = 0f;
     }
 
     public void OnGazeExit()
     {
-        gazing = false;
-        timer = 0f;
+        ResetGaze();
     }
 
     void Activate()
     {
-        Debug.Log("Gaze Interaction Triggered");
+        activated = true;
+        Debug.Log("Gaze Interaction Activated");
+        ResetGaze();
+    }
+
+    void UpdateIndicator()
+    {
+        if (progressIndicator != null)
+        {
+            float scale = currentGaze / gazeTime;
+            progressIndicator.transform.localScale = new Vector3(scale, scale, scale);
+        }
+    }
+
+    void ResetGaze()
+    {
+        isGazing = false;
+        activated = false;
+        currentGaze = 0f;
+        if (progressIndicator != null)
+            progressIndicator.transform.localScale = Vector3.zero;
     }
 }
