@@ -2,20 +2,35 @@ using UnityEngine;
 
 public class InstructionPanelManager : MonoBehaviour
 {
-    public GameObject panel;
+    public GameObject instructionPanel;
+    public float autoCloseTime = 5f;
+    private float timer;
 
-    void Start()
+    void OnEnable()
     {
-        panel.SetActive(true);
+        timer = 0f;
     }
 
-    public void ClosePanel()
+    void Update()
     {
-        panel.SetActive(false);
+        if (!instructionPanel.activeSelf) return;
+
+        timer += Time.deltaTime;
+        if (timer >= autoCloseTime)
+        {
+            ClosePanel();
+        }
     }
 
     public void OpenPanel()
     {
-        panel.SetActive(true);
+        instructionPanel.SetActive(true);
+        timer = 0f;
+    }
+
+    public void ClosePanel()
+    {
+        instructionPanel.SetActive(false);
     }
 }
+
