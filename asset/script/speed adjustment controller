@@ -4,7 +4,7 @@ public class SpeedAdjustmentController : MonoBehaviour
 {
     public RideMovementController ride;
     public float minSpeed = 2f;
-    public float maxSpeed = 10f;
+    public float maxSpeed = 12f;
 
     public void IncreaseSpeed()
     {
