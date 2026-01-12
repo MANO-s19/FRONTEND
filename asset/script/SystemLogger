@@ -1,0 +1,24 @@
+using UnityEngine;
+using System.Collections.Generic;
+
+public class SystemLogger : MonoBehaviour
+{
+    private List<string> logs = new List<string>();
+
+    public void Log(string message)
+    {
+        string entry = Time.time + " : " + message;
+        logs.Add(entry);
+        Debug.Log(entry);
+    }
+
+    public void ClearLogs()
+    {
+        logs.Clear();
+    }
+
+    public string[] GetLogs()
+    {
+        return logs.ToArray();
+    }
+}
