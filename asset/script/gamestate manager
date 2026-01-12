@@ -1,12 +1,24 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 public class GameStateManager : MonoBehaviour
 {
     public static GameStateManager Instance;
 
+    [Header("Ride States")]
     public bool isRideStarted;
     public bool isPaused;
     public bool isRideCompleted;
+    public bool isSafetyChecked;
+
+    [Header("Timers")]
+    public float rideTime;
+    public float pauseTime;
+
+    [Header("Debug")]
+    public bool enableLogs = true;
+
+    private Dictionary<string, string> stateHistory = new Dictionary<string, string>();
 
     void Awake()
     {
@@ -18,39 +30,90 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
-        ResetState();
+        ResetGameState();
+        LogState("System Initialized");
+    }
+
+    void Update()
+    {
+        if (isRideStarted && !isPaused)
+        {
+            rideTime += Time.deltaTime;
+        }
+
+        if (isPaused)
+        {
+            pauseTime += Time.deltaTime;
+        }
     }
 
     public void StartRide()
     {
+        if (!isSafetyChecked)
+        {
+            LogState("Ride blocked: Safety check not completed");
+            return;
+        }
+
         isRideStarted = true;
         isPaused = false;
-        isRideCompleted = false;
+        LogState("Ride Started");
     }
 
     public void PauseRide()
     {
         isPaused = true;
         Time.timeScale = 0f;
+        LogState("Ride Paused");
     }
 
     public void ResumeRide()
     {
         isPaused = false;
         Time.timeScale = 1f;
+        LogState("Ride Resumed");
     }
 
-    public void EndRide()
+    public void CompleteRide()
     {
         isRideCompleted = true;
         isRideStarted = false;
+        LogState("Ride Completed");
     }
 
-    public void ResetState()
+    public void SafetyCheckComplete()
+    {
+        isSafetyChecked = true;
+        LogState("Safety Check Completed");
+    }
+
+    public void ResetGameState()
     {
         isRideStarted = false;
         isPaused = false;
         isRideCompleted = false;
+        isSafetyChecked = false;
+        rideTime = 0f;
+        pauseTime = 0f;
         Time.timeScale = 1f;
+        stateHistory.Clear();
+    }
+
+    void LogState(string message)
+    {
+        if (!enableLogs) return;
+
+        string log = Time.time + " : " + message;
+        stateHistory.Add(stateHistory.Count.ToString(), log);
+        Debug.Log(log);
+    }
+
+    public string[] GetStateLogs()
+    {
+        List<string> logs = new List<string>();
+        foreach (var item in stateHistory)
+            logs.Add(item.Value);
+        return logs.ToArray();
     }
 }
+
