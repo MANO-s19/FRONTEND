@@ -1,0 +1,30 @@
+using UnityEngine;
+
+public class AudioManager : MonoBehaviour
+{
+    public AudioSource bgMusic;
+    public AudioSource rideSound;
+
+    void Start()
+    {
+        bgMusic.Play();
+    }
+
+    public void StartRideAudio()
+    {
+        bgMusic.Stop();
+        rideSound.Play();
+    }
+
+    public void StopRideAudio()
+    {
+        rideSound.Stop();
+        bgMusic.Play();
+    }
+
+    public void ToggleMute()
+    {
+        bgMusic.mute = !bgMusic.mute;
+        rideSound.mute = !rideSound.mute;
+    }
+}
