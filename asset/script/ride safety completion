@@ -1,0 +1,49 @@
+using UnityEngine;
+
+public class RideSafetyManager : MonoBehaviour
+{
+    public bool seatLocked;
+    public bool headsetDetected;
+    public bool areaClear;
+
+    void Start()
+    {
+        PerformSafetyCheck();
+    }
+
+    public void PerformSafetyCheck()
+    {
+        seatLocked = CheckSeat();
+        headsetDetected = CheckHeadset();
+        areaClear = CheckArea();
+
+        if (IsSafe())
+        {
+            GameStateManager.Instance.SafetyCheckComplete();
+        }
+        else
+        {
+            Debug.Log("Safety Check Failed");
+        }
+    }
+
+    bool CheckSeat()
+    {
+        return true;
+    }
+
+    bool CheckHeadset()
+    {
+        return true;
+    }
+
+    bool CheckArea()
+    {
+        return true;
+    }
+
+    bool IsSafe()
+    {
+        return seatLocked && headsetDetected && areaClear;
+    }
+}
