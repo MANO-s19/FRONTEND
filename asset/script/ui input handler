@@ -1,0 +1,24 @@
+using UnityEngine;
+
+public class UIInputHandler : MonoBehaviour
+{
+    public void OnStartClicked()
+    {
+        GameStateManager.Instance.StartRide();
+    }
+
+    public void OnPauseClicked()
+    {
+        GameStateManager.Instance.PauseRide();
+    }
+
+    public void OnResumeClicked()
+    {
+        GameStateManager.Instance.ResumeRide();
+    }
+
+    public void OnExitClicked()
+    {
+        Application.Quit();
+    }
+}
