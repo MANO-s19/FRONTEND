@@ -2,29 +2,24 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
-    public AudioSource bgMusic;
+    public AudioSource background;
     public AudioSource rideSound;
 
-    void Start()
+    public void PlayRideAudio()
     {
-        bgMusic.Play();
-    }
-
-    public void StartRideAudio()
-    {
-        bgMusic.Stop();
+        background.Stop();
         rideSound.Play();
     }
 
     public void StopRideAudio()
     {
         rideSound.Stop();
-        bgMusic.Play();
+        background.Play();
     }
 
     public void ToggleMute()
     {
-        bgMusic.mute = !bgMusic.mute;
-        rideSound.mute = !rideSound.mute;
+        background.mute = !background.mute;
+        rideSound.mute = background.mute;
     }
 }
