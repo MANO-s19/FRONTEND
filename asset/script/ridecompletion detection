@@ -1,0 +1,15 @@
+using UnityEngine;
+
+public class RideCompletionDetector : MonoBehaviour
+{
+    public Transform endPoint;
+    public RideMovementController ride;
+
+    void Update()
+    {
+        if (Vector3.Distance(ride.transform.position, endPoint.position) < 0.5f)
+        {
+            GameStateManager.Instance.EndRide();
+        }
+    }
+}
